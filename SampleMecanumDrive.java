@@ -159,7 +159,7 @@ public class  SampleMecanumDrive extends MecanumDrive {
         );
     }
 
-    public void turnAsync(double angle) {
+    public void turnAsync(double angle) {  //robotul se roteste
         trajectorySequenceRunner.followTrajectorySequenceAsync(
                 trajectorySequenceBuilder(getPoseEstimate())
                         .turn(angle)
@@ -167,12 +167,12 @@ public class  SampleMecanumDrive extends MecanumDrive {
         );
     }
 
-    public void turn(double angle) {
+    public void turn(double angle) {  // si aici la fel, se roteste
         turnAsync(angle);
         waitForIdle();
     }
 
-    public void followTrajectoryAsync(Trajectory trajectory) {
+    public void followTrajectoryAsync(Trajectory trajectory) {  //robotul avanseaza pe o traiectorie
         trajectorySequenceRunner.followTrajectorySequenceAsync(
                 trajectorySequenceBuilder(trajectory.start())
                         .addTrajectory(trajectory)
@@ -201,7 +201,7 @@ public class  SampleMecanumDrive extends MecanumDrive {
     public void update() {
         updatePoseEstimate();
         DriveSignal signal = trajectorySequenceRunner.update(getPoseEstimate(), getPoseVelocity());
-        if (signal != null) setDriveSignal(signal);
+        if (signal != null) setDriveSignal(signal); // daca nu avanseaza, sa nu se miste
     }
 
     public void waitForIdle() {
@@ -236,7 +236,7 @@ public class  SampleMecanumDrive extends MecanumDrive {
         }
     }
 
-    public void setWeightedDrivePower(Pose2d drivePower) {
+    public void setWeightedDrivePower(Pose2d drivePower) {  // aici setezi cu ce viteza se misca robotul
         Pose2d vel = drivePower;
 
         if (Math.abs(drivePower.getX()) + Math.abs(drivePower.getY())
@@ -258,7 +258,7 @@ public class  SampleMecanumDrive extends MecanumDrive {
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        lastEncPositions.clear();
+        lastEncPositions.clear();`
 
         List<Double> wheelPositions = new ArrayList<>();
         for (DcMotorEx motor : motors) {
@@ -283,7 +283,7 @@ public class  SampleMecanumDrive extends MecanumDrive {
     }
 
     @Override
-    public void setMotorPowers(double v, double v1, double v2, double v3) {
+    public void setMotorPowers(double v, double v1, double v2, double v3) {  // setezi puterea motoarelor
         leftFront.setPower(v);
         leftRear.setPower(v1);
         rightRear.setPower(v2);
